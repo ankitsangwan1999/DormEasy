@@ -1,0 +1,60 @@
+{% extends "noticeapp/newbase.html" %}
+{% load static%}
+{% load noticeapp_tags %}
+{% block content %}
+<div class="container">
+        <h2 class="center">Complain Form</h2>
+        <div class="row">
+            <form class="col s12" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}  
+                {{form.media}} 
+                <div class="row">
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">card_giftcard</i>
+                      {{form.title}}
+                      <label for="id_title">Title</label>
+                    </div>           
+                </div>
+                 <div class="row">
+                      <div class="input-field col s12">
+                        {{form.complaint}}
+                      </div>
+                  </div>
+                <div class="row">         
+                  <div class="input-field col s6">
+                      <select name="concerned_authority" required>
+                      <option value="" disabled selected>CONCERNED AUTHORITY</option>
+                      <optgroup label="Mess Authority">
+                          {%for name in MMCs %}
+                          <option value="{{name.mess_manager_email}}">
+                            Mess Manager ({{request.user.profile.hostel_alloted}})
+                          </option>
+                          <option value="{{name.mess_secretary_email}}">
+                            Mess Secretary ({{request.user.profile.hostel_alloted}})
+                          </option>
+                          {%endfor%}
+                      </optgroup>
+                      <optgroup label="Wardens">
+                          {%for name in Ws %}
+                          <option value="{{name.email}}">
+                            {{name.Name}}, Warden({{name.hostel}})
+                          </option>
+                          {%endfor%}
+                      </optgroup>
+                    </select>
+                  </div>
+                  <div class="input-field col s4 right">
+                    <input  name="status" value="0" 
+                        type="text" 
+                      class="validate" readonly>
+                    <label for="disabled">Status</label>
+                  </div>
+                </div>
+                <button class="btn waves-light" type="submit" name="submit">Add
+                <i class="material-icons right">send</i>
+                </button> 
+            </form>
+        </div>
+    </div>
+
+{%endblock%}

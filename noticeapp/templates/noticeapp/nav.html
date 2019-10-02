@@ -1,0 +1,191 @@
+
+{%load static%}
+
+
+<nav class="nav-wraper">
+    <ul class="left hide-on-med-and-up">
+        <div class="fixed-action-btn-left-bottom horizontal click-to-toggle" >
+            <a href="#" class="sidenav-trigger"
+                    data-target="slide-out" ><i class="material-icons">menu</i>
+            </a>
+        </div>
+    </ul>
+    <ul>
+            <li><a class="white-text" href="{% url 'homepage' %}">Home</a></li>
+            <li><a class="white-text" href="{% url 'homepage' %}">About</a></li>
+    </ul>
+            <ul class="right hide-on-med-and-down nav-btns">
+            {% if user.is_authenticated %} 
+                    <li>{%with profile_page="users-profile" %}
+                        <button onclick='window.location.href={%url profile_page%}' class = "btn">Profile
+                        <i class="material-icons right">send</i></button>
+                        {%endwith%}
+                    </li>
+                    {% if user.is_staff %}
+                     <li>
+                        <button onclick='window.location.href="/admin/"' class="btn">Dashboard
+                        <i class="material-icons right">send</i></button>
+                    </li>
+                    {%endif%}
+                    <li>{% with logouturl="users-logout"%}
+                        <button onclick = 'window.location.href="{%url logouturl %}"' class="btn" >Logout
+                        <i class="material-icons right">send</i></button>
+                        {%endwith%}
+                    </li>   
+            {%else%}  
+                    <li>
+                        <button onclick="document.getElementById('id01').style.display='block'" class="btn js-open-modal">Login
+                        <i class="material-icons right">send</i></button>
+                    </li>
+                    <li>
+                        <button onclick="document.getElementById('id02').style.display='block'"  class="btn js-open-modal">Register
+                        <i class="material-icons right">send</i></button>
+                    </li>     
+            {%endif%}
+            </ul>
+</nav>
+<!-- NAVBAR END -->
+
+ <!-- For Sign Up -->
+        <div id="id02" class="modal" style="background-color:cadetblue">
+            {% with register="users-register" %}
+            <form class="modal-content animate" action="{% url register %}"
+                    method="POST" id="sign_up_form">
+            {%endwith%}
+                    {%csrf_token%}
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <img src="https://image.freepik.com/free-vector/looking-talent-background_23-2147988439.jpg" alt="Avatar" class="avatar">
+                </div>
+
+                <div class="container">
+                    <label for="id_first_name_signup">First name:</label>
+                    <input type="text" name="first_name" maxlength="30" 
+                            id="id_first_name_signup" placeholder="First Name *" required>
+                    <label for="id_last_name_signup">Last name:</label>
+                    <input type="text" name="last_name" maxlength="150" 
+                            id="id_last_name_signup" 
+                            placeholder="Last Name *" required>
+                    <label for="id_username_signup">Username:</label>
+                    <input type="text" name="username" maxlength="150" autofocus required         id="id_username_signup"
+                             placeholder="User Name*">
+                    <br>
+                    <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+                    <br/>
+                    <label for="id_email_signup" >Email address:</label>
+                    <input type="email" name="email" placeholder="Email *" required 
+                            maxlength="254" id="id_email_signup">
+                    <label for="id_password1" >Password:</label>
+                    <input type="password" name="password1" required id="id_password1">
+                    <br>
+                    <span class="helptext">
+                        <ul><li>Your password can't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></ul>
+                    </span>
+                    <label for="id_password2" >Password confirmation:</label>
+                    <input type="password" name="password2" required id="id_password2">
+                    <br>
+                    <p>
+                    <span class="helptext">Enter the same password as before, for verification.</span>
+                    <br/>
+                    </p>
+                    <label for="id_regno_signup" >Registration No.:</label>
+                    <input type="text" name="regno" placeholder="Regno. *" required 
+                            maxlength="10" id="id_regno_signup">
+                    <label>Semester:</label>        
+                    <div class="input-field col s12">
+                    <select name="sem" id="id_sem_signup" required>
+                        {% for value,sem in sem_choices%}
+                                <option value="{{value}}">{{sem}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                    <label>Gender:</label>
+                     <div class="input-field col s12">
+                    <select name="gender" id="id_gender_signup" required>
+                        {% for value,gender in gender_choices%}
+                        <option value="{{value}}">{{gender}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <label>Hostel Alloted:</label>
+                <div class="input-field col s12">
+                    <select name="hostel_alloted" id="id_hostel_alloted_signup" required>
+                      {% for hostel in concerned_hostels%}
+                        {%if forloop.counter == 1%}
+                          <option value="{{hostel}}" selected>{{hostel}}</option>
+                        {%else%}
+                            <option value="{{hostel}}">{{hostel}}</option>
+                        {%endif%}
+                      {% endfor %}
+                    </select>
+                </div>
+                    <!-- <input type="text" name="hostel_alloted" required  -->
+                             <!-- id="id_hostel_alloted_signup"> -->
+                    <button class="btn waves-light" type="submit" name="submit" style="background-color:#415156">Sign Up
+                    <i class="material-icons right">send</i></button>  
+                </div>
+
+
+                <div class="container" style="background-color:#f1f1f1; 
+                text-align:center;">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                   <!--  <span class="psw"><a href="#">Forgot username?</a></span> -->
+                </div>
+            </form>
+        </div>
+<!-- For Login  -->
+  <div id="id01" class="modal" style="background-color:#0e7999">
+        {% with login="users-login" %}
+        {% if 'next' in request.GET %}
+        <form  class="modal-content animate" action="{%url login%}?{{url_part_1}}" method="POST">
+        {%else%}
+        <form   class="modal-content animate" action="{%url login%}" method="POST">
+        {%endif%}
+        {%endwith%}
+            {% csrf_token %}
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="https://image.freepik.com/free-vector/female-exercise_82446-44.jpg" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                {% if 'cook_user' and 'cook_pass' and 'cook_regno' in request.COOKIES%}
+                <input type="text" id="inputUsername" class="form-control" name="username" 
+                placeholder="User Name" value="{{request.COOKIES.cook_user}}" required>
+                <label for="regno"><b>Registration No:</b></label>
+                <input type="text" id="inputRegno" class="form-control" name="regno" 
+                placeholder="Registration No." value="{{request.COOKIES.cook_regno}}" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="Password" id="inputPassword" name="password" class="form-control" placeholder="Password" value="{{request.COOKIES.cook_pass}}" required>
+                <label><input type="checkbox" name="remember_me" value="remember_me" checked="checked" /><span>Remember Me</span></label>
+                {%else%}                       
+                <input type="text" id="inputUsername" class="form-control" 
+                        name="username" 
+                placeholder="User Name" required>
+                <label for="regno"><b>Registration No:</b></label>
+                <input type="text" id="inputRegno" class="form-control" name="regno" 
+                placeholder="Registration No." value="{{request.COOKIES.cook_regno}}" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="Password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                <label><input type="checkbox" name="remember_me" value="remember_me" /><span>Remember Me</span></label>        
+                {%endif%}    
+                <button class="btn waves-light" type="submit" name="submit">Login
+                <i class="material-icons right">send</i></button>                   
+                <label><a href="{%url 'password_reset'%}" class="right"><strong>Forgot Password?</strong></a></label>
+                <a href="{%url 'social:begin' 'google-oauth2'%}" class="waves-effect waves-light btn-large social google">
+                <img 
+                    class="circle" style="display: inline-block;" height="100%" alt="Google &quot;G&quot; Logo" src="{%static 'noticeapp/img/google-icon.png' %}" 
+                /> 
+                <span style="vertical-align: text-bottom;">Sign in with Google</span></a>
+                <a href="{%url 'social:begin' 'facebook'%}" class="waves-effect waves-light btn-large social facebook">
+                <img 
+                    class="circle" style="display: inline-block;" height="100%" alt="Google &quot;G&quot; Logo" src="{%static 'noticeapp/img/facebook-icon.png' %}" 
+                />  <span style="vertical-align: text-bottom;">Sign in with Facebook</span></a>
+            </div>
+            <div  class="container" style="text-align:center;background-color:#f1f1f1;margin-top:5px; ">
+                    <button  type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel
+                    </button>
+            </div>
+        </form>
+    </div>

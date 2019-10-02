@@ -1,0 +1,72 @@
+{% extends "noticeapp/newbase.html" %}
+{%load static%}
+{%block content%}
+
+
+<div class="container">
+
+    {% for complain in complains %}
+    <ul class="collection with-header">
+      <li class="collection-header brown-text" >
+        <div>
+           <div class="chip chip-imp">
+            <strong>{{complain.first_complainer}}</strong>
+          </div>
+          <div class="right">
+            <strong>
+                {{complain.date_added|date:"F d, Y"}}
+            </strong>
+          </div>
+        </div>
+        <div class="divider"></div> 
+          <div>
+            <h4>
+            	{%with compdet="complain-detail" %}
+              <a href="{% url compdet complain.id%}" id="{{complain.id}}" >{{complain.title}}</a>
+              {%endwith%}
+            </h4>
+              	<div class="chip chip-imp">
+                 Concerned Authority: {{complain.concerned_authority}}
+ 				</div>
+ 				<div class="chip chip-imp">
+                 Concerned Hostel: {{complain.related_hostel}}
+ 				</div>
+ 				<br>
+ 				<div class="chip chip-imp">
+ 				{% for value,choice in status_choices%}
+                        {%if value == complain.status%}
+                        	Status: {{choice}}
+                        {%endif%}
+                {% endfor %}
+        </div>
+       <!-- Removed button From Here -->
+      </div>
+        </li>
+        <li class="collection-item content-markdown">
+            {{complain.complaint|safe}}
+            {% include 'complain/comment.html' %}
+
+        </li>
+        <li>
+          
+        </li>
+    </ul>
+    
+       {%endfor%}
+<!-- Pagination -->
+<!-- page_obj is the object passed by the class to tho the template -->
+<!-- page_obj.paginator paginator obj of current page -->
+       
+{%if is_paginated%}
+  {% include 'complain/pagination.html'%}
+{%endif%}
+</div>
+
+
+
+
+
+
+
+
+{%endblock%}

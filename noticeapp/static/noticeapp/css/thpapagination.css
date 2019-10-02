@@ -1,0 +1,232 @@
+@import "compass/css3";
+
+*{
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  font-family:arial;
+}
+body{
+  background-color:#555;
+  text-align: center;
+  font-family: arial;
+}
+.pagination{
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+  li{
+    display: inline;
+    text-align: center;
+  }
+  a{
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color:#fff;
+    margin-left: -1px;
+    border:1px solid transparent;
+    line-height: 1.5;
+    &.active{  cursor: default;}
+    &:active{ outline: none;}
+  }
+}
+.modal-1{
+  li{
+    &:first-child{
+      a{ @include border-radius(6px 0 0 6px);}
+    }
+    &:last-child{
+      a{@include border-radius(0 6px 6px 0);}
+    }
+  }
+  a{
+    border-color:#ddd; 
+    color:#4285F4;
+    background:#fff;
+    &:hover{
+      background:#eee;
+    }
+    &.active, &:active{
+      border-color: #4285F4;
+      background:#4285F4;
+      color:#fff;
+    }
+  } 
+}
+.modal-2{
+  li{
+    &:first-child{
+      a{ @include border-radius(50px 0 0 50px);}
+    }
+    &:last-child{
+      a{@include border-radius(0 50px 50px 0);}
+    }
+  }
+  a{
+    border-color:#ddd; 
+    color:#999;
+    background:#fff;
+    &:hover{
+      color:#E34E48;
+      background-color: #eee;
+    }
+    &.active, &:active{
+      border-color: #E34E48;
+      background:#E34E48;
+      color:#fff;
+    }
+  } 
+}
+  .modal-3{
+    a{
+      margin-left: 3px;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      @include border-radius(100%);
+      &:hover{
+        background-color: #4DAD16;
+      }
+       &.active, &:active{
+         background-color: #37B247;
+       }
+    }
+  }
+.modal-4{
+   a{
+      margin:0 5px;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      @include border-radius(100%);
+      background-color: #F7C12C;
+     &.prev{
+        @include border-radius(50px 0 0 50px);
+       width:100px;
+     }
+     &.next{
+       @include border-radius(0 50px 50px 0);
+       width:100px;
+     }
+      &:hover{
+        background-color:#FFA500;
+      }
+       &.active, &:active{
+         background-color:#FFA100;
+       }
+    }
+}
+.modal-5{
+  position: relative;
+   &:after{
+     content: '';
+     position: absolute;
+     width: 100%;
+     height: 35px;
+     left:0;
+     bottom:0;
+     z-index: -1;
+  @include background-image(linear-gradient( left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 40% ,rgba(0,0,0,0.65) 50%,rgba(0,0,0,0.65) 60%,rgba(0,0,0,0) 100%));
+   }
+
+  a{
+    color:#666;
+    padding:13px 5px 5px;
+    margin: 0 10px;
+    position: relative;
+     &:hover{
+      color: #fff;
+       &:after{
+        content: '';
+         position: absolute;
+         width: 24px;
+         height: 24px;
+         background:#1E7EE2;
+         @include border-radius(100%);
+         z-index: -1;
+         left: -3px;
+         bottom: 4px;
+         margin: auto;
+       }
+    }
+    &.next , &.prev{
+      color:#1E7EE2;
+       &:hover{
+         color:#fff;
+         &:after{display: none;}
+       }
+    }
+    &.active {
+      background:#1E7EE2;
+      color:#fff;
+      &:before{
+        content: '';
+        position: absolute;
+        top:-11px;
+        left:-10px;
+        width: 18px;
+        border:10px solid transparent;
+        border-bottom:7px solid #104477;
+        z-index: -1;
+      }
+      &:hover{
+         &:after{display: none;}
+       }
+    }
+   
+  }
+}
+.modal-6{
+  @include box-shadow(0  2px 2px #333);
+  @include border-radius(50px);
+  a{
+    border-color:#ddd; 
+    color:#999;
+    background:#fff;
+    padding: 10px 15px;
+    &:hover{
+      color:#E34E48;
+      background-color: #eee;
+    }
+    &.prev{
+      @include border-radius(50px 0 0 50px);
+      width:50px;
+      position: relative;
+      &:after{
+         content: '';
+         position: absolute;
+         width: 10px;
+         height: 100%;
+        top: 0;
+        right: 0;
+        @include background-image(linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 100%));
+      }
+    }
+   &.next{
+      @include border-radius( 0 50px 50px 0);
+     width:50px;
+     position: relative;
+      &:after{
+         content: '';
+         position: absolute;
+         width: 10px;
+         height: 100%;
+        top: 0;
+        left: 0;
+        @include background-image(linear-gradient(left, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%));
+      }
+    }
+    &.active{
+      border-color: #bbb;
+      background:#fff;
+      color:#E34E48;
+      @include box-shadow(0 0 3px rgba(0,0,0,0.25) inset);
+    }
+  } 
+}

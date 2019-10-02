@@ -1,0 +1,191 @@
+{%load complain_tags%}
+{%if user.is_authenticated%}
+<!-- Review Starts here -->
+            {% if complain.id|is_res %}
+              {% ifequal user complain.first_complainer %}
+                <ul class="collapsible popout">
+                    <li>
+                        <div class="collapsible-header collapsible-header-comment" id="#">
+                          <i class="material-icons">mode_comment</i>Reviews/Remarks</p></div>
+                        <div class="collapsible-body teal lighten-5">
+                            
+                              <!-- comments is a queryset comments.count shows no. of objects -->
+                            {%useful_reviews complain.id as comments%}
+                            <!-- above tag only return if no. of comments on  -->
+                            {% if comments %}
+                              {% for everycomment in comments %}
+                                <div class="comments">
+                                 <div class="comment">
+                                    <strong>{{everycomment.comment}}</strong>
+                                  </div>
+                                 <div class="comment-foot">
+                                  <span>-by</span>
+                                  <div class="chip ">
+                                    {{everycomment.user}}
+                                  </div>
+                                </div>
+                                 <br/> 
+                              </div>                        
+                              {%endfor%}
+                            {%else%}
+                              <div><span><strong>No Reviews yet</strong></span></div>
+                            {%endif%}                            
+                            
+                            <div class="divider"></div>
+                            <div>
+                                <div class="row">
+                                    <form method="POST" 
+                                          action="{% url 'post-comment' complain.id %}"
+                                          class="col s12">
+                                           {%csrf_token%} 
+                                       <input type="hidden" name="next" 
+                                       value="{{ request.get_full_path }}"> 
+                                      <div class="row">
+                                        <div class="input-field col s12">
+                                          <i class="material-icons prefix">mode_edit</i>
+                                          <textarea  id="icon_prefix2" placeholder="Review..."
+                                          class="materialize-textarea" name="comment" required></textarea>
+                                          <button class="btn" 
+                                          type="submit" name="submit" value="2">Add Review
+                                            <i class="material-icons right">send</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                </div>
+                            </div> 
+                        </div>
+                    </li>
+                </ul>
+              {%else%}
+                <ul class="collapsible popout">
+                    <li>
+                        <div class="collapsible-header collapsible-header-comment" id="#">
+                        <p><i class="material-icons">mode_comment</i>Reviews/Remarks</p></div>
+                        <div class="collapsible-body teal lighten-5">
+                            
+                              <!-- comments is a queryset comments.count shows no. of objects -->
+                            {%useful_reviews complain.id as comments%}
+                            <!-- above tag only return if no. of comments on  -->
+                            {% if comments %}
+                             {% for everycomment in comments%}
+                               <div class="comments">
+                                 <div class="comment">
+                                    <strong>{{everycomment.comment}}</strong>
+                                  </div>
+                                 <div class="comment-foot">
+                                  <span>-by</span>
+                                  <div class="chip ">
+                                    {{everycomment.user}}
+                                  </div>
+                                </div>
+                                 <br/>  
+                              </div>                       
+                              {%endfor%}
+                            {%else%}
+                              <div><span><strong>No Reviews yet</strong></span></div>
+                            {%endif%}
+                        </div>                               
+                    </li>
+                </ul>
+              {% endifequal %}
+              {% endif %}
+
+                <!-- Giving Review ends here -->
+
+
+
+
+
+
+
+
+                             
+<!-- Comment started -->
+                <ul class="collapsible popout">
+                    <li>
+                        <div class="collapsible-header collapsible-header-comment" id="#">
+                          <i class="material-icons">mode_comment</i>Comments</p></div>
+                        <div class="collapsible-body teal lighten-5">
+                            
+                              <!-- comments is a queryset comments.count shows no. of objects -->
+                            {%useful_comments complain.id as comments%}
+                            <!-- above tag only return if no. of comments on  -->
+                            {% if comments %}
+                              {% for everycomment in comments%}
+                                <div class="comments">
+                                 <div class="comment">
+                                    <strong>{{everycomment.comment}}</strong>
+                                  </div>
+                                 <div class="comment-foot">
+                                  <span>-by</span>
+                                  <div class="chip ">
+                                    {{everycomment.user}}
+                                  </div>
+                                </div>
+                                 <br/> 
+                              </div>                        
+                              {%endfor%}
+                            {%else%}
+                              <div><span><strong>No comments yet</strong></span></div>
+                            {%endif%}                            
+                            
+                            <div class="divider"></div>
+                            <div>
+                                <div class="row">
+                                    <form method="POST" 
+                                          action="{% url 'post-comment' complain.id %}"
+                                          class="col s12">
+                                           {%csrf_token%} 
+                                       <input type="hidden" name="next" 
+                                       value="{{ request.get_full_path }}"> 
+                                      <div class="row">
+                                        <div class="input-field col s12">
+                                          <i class="material-icons prefix">mode_edit</i>
+                                          <textarea  id="icon_prefix2" placeholder="Comment..."
+                                          class="materialize-textarea" name="comment" required></textarea>
+                                          <button class="btn" 
+                                          type="submit" name="submit">Comment
+                                            <i class="material-icons right">send</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                </div>
+                            </div> 
+                        </div>
+                    </li>
+                </ul>
+        {%else%}
+        <!-- Comment started -->
+                <ul class="collapsible popout">
+                    <li>
+                        <div class="collapsible-header collapsible-header-comment" id="#">
+                          <i class="material-icons">mode_comment</i>Comments</p></div>
+                        <div class="collapsible-body teal lighten-5">
+                            
+                              <!-- comments is a queryset comments.count shows no. of objects -->
+                            {%useful_comments complain.id as comments%}
+                            <!-- above tag only return if no. of comments on  -->
+                            {% if comments %}
+                             {% for everycomment in comments%}
+                               <div class="comments">
+                                 <div class="comment">
+                                    <strong>{{everycomment.comment}}</strong>
+                                  </div>
+                                 <div class="comment-foot">
+                                  <span>-by</span>
+                                  <div class="chip ">
+                                    {{everycomment.user}}
+                                  </div>
+                                </div>
+                                 <br/>  
+                              </div>                       
+                              {%endfor%}
+                            {%else%}
+                              <div><span><strong>No comments yet</strong></span></div>
+                            {%endif%}                               
+                    </li>
+                </ul>
+        {%endif%}
+
