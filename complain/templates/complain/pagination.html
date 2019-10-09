@@ -1,0 +1,45 @@
+ <div style = "margin:10px;padding:0px;text-align: center;">
+ <div class="row">
+       <ul class="pagination">
+         {% if page_obj.has_previous%}
+            <li class="waves-effect "><a href="?page=1"><b>First</b></a></li>
+            <li>
+            <a href="?page={{page_obj.number|add:'-1'}}">
+                <i class = "material-icons">chevron_left</i>
+            </a>
+          </li>
+        {% else %}
+        <li>
+            <a>
+                <i class = "material-icons">chevron_left</i>
+            </a>
+        </li>
+         {%endif%}
+
+         {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="active "><a href="?page={{num}}"><b>{{num}}</b></a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3'%}
+                <li class="waves-effect "><a href="?page={{num}}"><b>{{num}}</b></a></li>
+            {%endif%}
+         {%endfor%}
+    
+         {%if page_obj.has_next%}
+         <li>
+         <a href="?page={{page_obj.number|add:'1'}}">
+            <i class = "material-icons">chevron_right</i> 
+         </a>
+         </li>
+            <li class="waves-effect">
+                <a href="?page={{page_obj.paginator.num_pages}}"><b>Last</b></a>
+            </li>
+        {%else%}
+        <li>
+         <a>
+            <i class = "material-icons">chevron_right</i>
+         </a>
+        </li>
+         {%endif%}
+       </ul>
+</div>      
+</div>
