@@ -1,0 +1,167 @@
+{%extends 'noticeapp/newbase.html' %}
+{%block content%}
+    
+     <!-- Navbar goes here -->
+
+    <!-- Page Layout here -->
+<div class="row">
+
+  <div class="col s3">
+    <ul class="collection">
+      {% if user.is_staff %}
+      <li class="collection-item">
+        {%with addnotice="addnotice" %}
+        <a class="waves-effect waves-light btn" href="{%url addnotice%}">Add a Notice</a>
+        {%endwith%}
+      </li>
+      <li class="collection-item">
+        {% with allcom="all_complains"%}
+        <a class="waves-effect waves-light btn" href="{%url allcom %}">Check All Complaints</a>
+        {%endwith%}
+      </li>
+      <li class="collection-item">
+        {% with comp_on_me="complains_on_me"%}
+        <a class="waves-effect waves-light btn" href="{%url comp_on_me %}">Complaints On Me</a>
+        {%endwith%}
+      </li>
+      <li class="collection-item">
+        {% with rev_on_me="reviews_on_me"%}
+        <a class="waves-effect waves-light btn" href="{%url rev_on_me %}">Check Feedbacks</a> 
+        <!-- Will show all the resolved Complains by the Admin -->
+        {%endwith%}
+      </li>
+      <li class="collection-item">
+        {% with mnnit_c_d="mnnit_contact_details"%}
+        <a class="waves-effect waves-light btn" href="{% url mnnit_c_d %}">Contact Details</a>
+        {%endwith%}
+      </li>      
+      {%else%}
+      <li class="collection-item">
+        {%with newcomplain="new_complain" %}
+        <a class="waves-effect waves-light btn" href="{%url newcomplain%}">File a Complaint</a>
+        {%endwith%}
+      </li>
+      <li class="collection-item">
+        {% with ntcbrd="specific-notice-board"%}
+        <a class="waves-effect waves-light btn" href="{%url ntcbrd%}">Notice Board</a>
+      </li>
+        {%endwith%}
+      <li class="collection-item">
+         {% with mycom="my_complains"%}
+        <a class="waves-effect waves-light btn"  href="{%url mycom%}">My Complaints</a>
+        {%endwith%}
+      </li>
+      <li class="collection-item">
+          {% with allcom="all_complains"%}
+        <a class="waves-effect waves-light btn" href="{% url allcom%}">All Complaints</a>
+          {%endwith%}
+      </li>
+      <li class="collection-item">
+        <a class="waves-effect waves-light btn">GuestRoom Book Request</a>
+      </li>
+      <li class="collection-item">
+        {% with gf="give_feedback" %}
+        <a class="waves-effect waves-light btn" href="{% url gf %}">Give Feedback</a>
+        {% endwith %}
+      </li>
+      <li class="collection-item">
+        {% with mnnit_c_d="mnnit_contact_details"%}
+        <a class="waves-effect waves-light btn" href="{% url mnnit_c_d %}">Contact Details</a>
+        {%endwith%}
+      </li>
+    </ul>
+      {%endif%}     
+  </div>
+
+
+<!-- Notice Board For logged in Users -->
+  {% if user.is_authenticated  %}
+       <div class="col s8 block blue noticeboard pushpin" id="blue">
+       {%if allnotices %}
+        <h1>All Notices:</h1>
+       {%else%}
+        <h1>{{user.profile.hostel_alloted}} Notices:</h1>
+       {%endif%}  
+        <ul>
+          {% for notice in notices %}
+          <li>{% with href="#"|add:notice.label %}
+            <a class="waves-effect waves-light btn modal-trigger" href={{href}}>
+              <h2>{{notice.title}}</h2>
+            </a>
+            <blockquote>{{notice.date_posted}}</blockquote>
+          </li>
+          <div id={{notice.label}} class="modal">
+            {% endwith %}
+            <div class="modal-content">
+              <h4>{{notice.title}}</h4>
+              <p>{{notice.description|safe}}</p>
+              <blockquote>{{notice.issuing_authority}}</blockquote>
+              Click <a id="{{notice.label}}" href="/media/{{notice.notice_file}}">here</a> to see the notice       
+              <div id="{{notice.notice_file}}"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </ul>
+      </div>  
+  <!-- For not logged in users and Admins -> showing all notice boards -->
+  {%else%}
+      <div class="col s8 block blue noticeboard pushpin" id="blue">  
+        {# if notice.concerned.hostels #}
+        <h1>All Notices:</h1>
+        <ul>
+          {% for notice in notices %}
+          <li>{% with href="#"|add:notice.label %}
+            <a class="waves-effect waves-light btn modal-trigger" href={{href}}>
+              <h2>{{notice.title}}</h2>
+            </a>
+            <blockquote>{{notice.date_posted}}</blockquote>
+          </li>
+          <div id={{notice.label}} class="modal">
+            {% endwith %}
+            <div class="modal-content">
+              <h4>{{notice.title}}</h4>
+              <p>{{notice.description|safe}}</p>
+              Click <a id="{{notice.label}}" href="/media/{{notice.notice_file}}">here</a> to see the notice       
+              <div id="{{notice.notice_file}}"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </ul>
+      </div>
+  {%endif%}
+
+
+
+
+ <!--  <div class="col s2 ">
+      <ul class="collection with-header">
+      <li class="collection-header"><h4>First Names</h4></li>
+      <li class="collection-item">Alvin</li>
+      <li class="collection-item">Alvin</li>
+      <li class="collection-item">Alvin</li>
+      <li class="collection-item">Alvin</li>
+    </ul>
+  </div>
+</div>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

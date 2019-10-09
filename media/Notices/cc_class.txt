@@ -1,0 +1,4 @@
+== always converts smaller data type no. to lager onw for comparing
+String is a class in C++
+
+Balanced Binary Search Tree

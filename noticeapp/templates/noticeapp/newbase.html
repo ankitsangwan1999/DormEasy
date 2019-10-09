@@ -1,0 +1,260 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% if title %}
+    <title>{{title}}</title>
+    {%else%}
+     <title>Home</title>
+     {%endif%}
+    <!-- CSS  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'noticeapp/css/basecss.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'noticeapp/css/style.css' %}" rel="stylesheet" />
+    <link href="{%static 'noticeapp/css/materialize.css' %}" rel="stylesheet" />
+    <link href="{%static 'noticeapp/css/materialize-social.css' %}" rel="stylesheet" />
+<style>
+      html, body, .block {
+        height: 100%;
+      }
+      nav ul li a:hover, nav ul li a.active {
+        background-color: rgba(0,0,0,.1);
+      }
+      footer {
+        padding-left: 0;
+      }
+    </style>
+</head>
+<body>
+
+ {% include 'noticeapp/nav.html' %}
+ {%block content%}{%endblock%}
+ 
+{% include 'noticeapp/footer.html' %}
+</body>
+<!-- Scripts-->
+    <script 
+src="https://code.jquery.com/jquery-2.1.1.min.js">
+    </script>
+    <script 
+src="{% static 'noticeapp/js/materialize.js'%}">
+    </script>
+    <script 
+src="{% static 'noticeapp/js/init.js'%}">
+    </script>
+    <script type="text/javascript" 
+src="https://code.jquery.com/jquery-2.1.1.min.js">
+    </script>
+    <script 
+src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <script 
+src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+<!-- # -->
+<!--PushPin-->
+<script>
+ $(document).ready(function(){
+    $('.pushpin').pushpin();
+  });
+</script>
+<!-- # -->
+
+<!-- TO make Materialize CSS select work -->
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
+ 
+<!-- # -->
+
+
+{%for message in messages%}
+    <script type="text/javascript">
+        M.toast({html:"{{message}}",classes: 'rounded', displayLength: 3900}).call();
+    </script>
+{%endfor%}
+
+
+{% if user.is_authenticated is False %}
+<script>
+$(document).ready(function(){
+  var hash = window.location.hash;
+  hash = hash.split("?");
+  // M.toast({html:hash[0],classes: 'rounded', displayLength: 3900}).call();
+  if(hash.length>0 && hash[0]=="#login"){
+        var modal = document.getElementById('id01');
+        modal.style.display = 'block';
+        // Toasts are Useful To check if things are working properly out.
+            // M.toast({html:modal,classes: 'rounded', displayLength: 3900}).call();
+    }
+    else if(hash.length>0 && hash[0]=="#register"){
+        var modal = document.getElementById('id02');
+        modal.style.display = 'block';
+    }
+});
+</script>
+{%endif%}
+<!--  -->
+
+ <!-- Time Picker -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.timepicker').timepicker();
+    });
+</script>
+<!-- Date Picker -->
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+        });
+</script>
+<!-- For Working of Model -->
+<script>
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+</script>
+<!-- Increasing the No. on the Complain -->
+<script type="text/javascript">
+
+
+// jQuery(document).on("click","button",function(e){
+
+//     complain_id = jQuery(this).attr("value1");
+//     alert(complain_id);
+// }
+
+function dislike(){
+    // alert("Function Call");
+        var complain_id = document.getElementById('dislike').getAttribute("value1");
+        alert("You have Supporting this Complain Now...");
+        
+        $.ajax({
+                
+                type : 'GET',
+                url: "{% url 'dislike'  %}",
+                data : {
+                        complain_id : complain_id
+                },
+                
+                success:function(data){ 
+
+                        // alert(data.helo);
+                        $("#number").html(data.newnumber);
+                
+
+            }   
+
+
+        });
+
+
+
+}
+</script>
+<!-- For Tool Tip -->
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });   
+</script>
+<!-- 
+<script>
+    // A function to toggle 'Show Password' while login.
+    function showPassword() {
+        var x = document.getElementById("login_password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+ -->
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+window.onbeforeunload = function() {
+    {%for message in messages%}
+        if("Registered Successfully.Log in to continue with Website."===message){
+            $('#sign_up_form').trigger.('reset');
+        }
+    {%endfor%}
+    var fieldExists = document.getElementById('id_first_name_signup');
+    if(fieldExists !== null)
+        sessionStorage.setItem("id_first_name_signup", $('#id_first_name_signup').val());
+    var fieldExists = document.getElementById('id_last_name_signup');
+    if(fieldExists !== null)
+        sessionStorage.setItem("id_last_name_signup", $('#id_last_name_signup').val());
+    var fieldExists = document.getElementById('id_email_signup');
+    if(fieldExists !== null)
+        sessionStorage.setItem("id_email_signup", $('#id_email_signup').val());
+    var fieldExists = document.getElementById('id_username_signup');
+    if(fieldExists !== null)
+        sessionStorage.setItem("id_username_signup", $('#id_username_signup').val());
+    var fieldExists = document.getElementById('id_regno_signup');
+    if(fieldExists !== null)
+        sessionStorage.setItem("id_regno_signup", $('#id_regno_signup').val());
+    // var fieldExists = document.getElementById('id_gender_signup');
+    // if(fieldExists !== null)
+    //     sessionStorage.setItem("id_gender_signup", $('#id_gender_signup').val());
+    // var fieldExists = document.getElementById('id_hostel_alloted_signup');
+    // if(fieldExists !== null)
+    //     sessionStorage.setItem("id_hostel_alloted_signup", 
+    //                             $('#id_hostel_alloted_signup').val());
+    // var fieldExists = document.getElementById('id_sem_signup');
+    // if(fieldExists !== null)
+    //     sessionStorage.setItem("id_sem_signup", 
+    //                             $('#id_sem_signup').val());
+    var fieldExists = document.getElementById('inputUsername');
+    if(fieldExists !== null)
+        sessionStorage.setItem("inputUsername", $('#inputUsername').val());
+    var fieldExists = document.getElementById('inputRegno');
+    if(fieldExists !== null)
+        sessionStorage.setItem("inputRegno", $('#inputRegno').val());   
+}
+});   
+$(document).ready(function(){
+window.onload = function() {
+    var name = sessionStorage.getItem("id_first_name_signup");
+    if (name !== null) $('#id_first_name_signup').val(name);
+    var name = sessionStorage.getItem("id_last_name_signup");
+    if (name !== null) $('#id_last_name_signup').val(name);
+    var name = sessionStorage.getItem("id_email_signup");
+    if (name !== null) $('#id_email_signup').val(name);
+    var name = sessionStorage.getItem("id_username_signup");
+    if (name !== null) $('#id_username_signup').val(name);
+    var name = sessionStorage.getItem("id_regno_signup");
+    if (name !== null) $('#id_regno_signup').val(name);
+    // var name = sessionStorage.getItem("id_gender_signup");
+    // if (name !== null) $('#id_gender_signup').val(name);
+    // var name = sessionStorage.getItem("id_hostel_alloted_signup");
+    // if (name !== null) $('#id_hostel_alloted_signup').val(name);
+    // var name = sessionStorage.getItem("id_sem_signup");
+    // if (name !== null) $('#id_sem_signup').val(name); 
+    var name = sessionStorage.getItem("inputUsername");
+    if (name !== null) $('#inputUsername').val(name);
+    var name = sessionStorage.getItem("inputRegno");
+    if (name !== null) $('#inputRegno').val(name);
+}
+}); 
+</script>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

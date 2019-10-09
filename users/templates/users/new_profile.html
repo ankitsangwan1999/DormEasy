@@ -1,0 +1,61 @@
+{%extends "noticeapp/newbase.html" %}
+{%block content%}
+
+
+{%if user.is_authenticated%}
+	<div class="container">
+		<ul class="collection with-header">
+			<li class="collection-header brown-text">
+		  		<div>
+			    	<!-- <img src="{{user.profile.image.url}}" class="circle responsive-img"> -->
+			    	<div>
+			      		<h4>Username: {{user.username}}</h4>
+			      		<h5>Email: {{user.email}}</h5>
+			    	</div>
+		  		</div>
+			</li>
+			<li class="collection-header brown-text">
+		      <form method="post" action="" enctype="multipart/form-data">
+		      <!-- Adding Security from Cross-site hacking acttacks -->
+		      {% csrf_token %}
+		   			<label for="id_regno" >Registration No.:</label>
+                    <input type="text" name="regno" placeholder="Regno. *" required 
+                            maxlength="10" id="id_regno">
+                    <label>Semester:</label>        
+                    <div class="input-field col s12">
+                    <select name="sem" required>
+                        {% for value,sem in sem_choices%}
+                                <option value="{{value}}">{{sem}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                    <label>Gender:</label>
+                     <div class="input-field col s12">
+                    <select name="gender" required>
+                        {% for value,gender in gender_choices%}
+                        <option value="{{value}}">{{gender}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <label>Hostel Alloted:</label>
+                <div class="input-field col s12">
+                    <select name="hostel_alloted" required>
+                      {% for hostel in concerned_hostels%}
+                        {%if forloop.counter == 1%}
+                          <option value="{{hostel}}" selected>{{hostel}}</option>
+                        {%else%}
+                            <option value="{{hostel}}">{{hostel}}</option>
+                        {%endif%}
+                      {% endfor %}
+                    </select>
+                  <button class="button" type="submit">Create Profile</button>
+		      </form>
+		    </li>
+		</ul>
+	</div>
+	{%else%}
+		<h1>Login First</h1>
+	{%endif%}
+
+
+{%endblock%}

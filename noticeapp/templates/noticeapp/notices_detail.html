@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Notice detail</title>
+</head>
+<body>
+{{notice.title}}
+{{notice.description}}
+{%for name in notice.concerned_hostels.all%}
+	{{name}}
+{%endfor%}
+{{notice.date_posted}}
+</body>
+</html>

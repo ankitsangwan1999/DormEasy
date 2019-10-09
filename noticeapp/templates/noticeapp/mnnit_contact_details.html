@@ -1,0 +1,77 @@
+{% extends "noticeapp/newbase.html "%}
+{% block content%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>contact dertails</title>
+	<style type="text/css">
+		body{
+			background-color: grey;
+		}
+		table{
+			width :800px;
+			margin :auto;
+			table-layout: fixed;
+			text-align: center;
+			margin-top: 50px;
+			font-family: Arial;
+			color: #fff;
+		}
+		table ,th,td{
+			border: 1px dotted white;
+			border-collapse: collapse;
+			padding: 20px;
+			font-size: 20px;
+		}
+		th{
+			background-color: purple;
+			padding: 30px;
+			text-transform: uppercase;
+		}
+		td:nth-child(5n+1){
+			background: red;
+
+		}td:nth-child(5n+2){
+			background: blue;
+
+		}
+		td:nth-child(5n+3){
+			background: green;
+
+		}
+		td:nth-child(5n+4){
+			background:orange;
+		}
+		h1{
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<h1>IMPORTANT CONTACT NUMBERS</h1>
+<table>
+<tr><td>Director office</td><td> 0532-2271003</td></tr>
+<tr><td>Registrar office </td>><td> 0532-2271003</td></tr>
+<tr><td>Health office   </td><td> 0532-2271003</td></tr>
+<tr><td>Medical office  </td><td> 0532-2271003</td></tr>
+<tr><td>Security office </td><td> 0532-2271003</td></tr>
+<tr><td>24*7 ohelpline  </td><td> 0532-2271003</td></tr>
+</table>
+<h1>HOSTEL CONTACT NUMBERS</h1>
+<table>
+<tr><th>Name of Hostel</th><th>care taker </th><th>Contact number</th></tr>
+<tr><td>swami vivwekanand boys hostel</td><td>care taker </td><td> 0532-2271003</td></tr>
+<tr><td>M.M. Malviya</td><td>care taker </td><td> 0532-2271003</td></tr>
+<tr><td>Tilak</td><td>care taker </td><td> 0532-2271003</td></tr>
+<tr><td>Tondon </td><td>care taker </td><td> 0532-2271003</td></tr>
+</table>
+<h1>OTHER CONTACT DETAILS</h1>
+<table>
+	<tr><th>Name</th><th>Designation</th><th>Contact number</th><th>Email @mnnit.ac.in</th></tr>
+	<tr><td>Prof. Vijya Bhadauria</td><td>Chief Warden(Girls Hostel)</td><td>13412414</td><td>vijya</td></tr>
+	<tr><td>Prof. Shiv Datt Kumar</td><td>Chief Warden (Boys Hostel)</td><td>13451513</td><td>sdt</td></tr>
+</table>
+</body>
+</html>
+
+{% endblock%}

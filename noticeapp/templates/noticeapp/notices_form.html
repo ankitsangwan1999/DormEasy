@@ -1,0 +1,85 @@
+{%extends "noticeapp/newbase.html" %}
+{% load static%}
+{% load noticeapp_tags %}
+{%block content%}
+    <div class="container">
+        <h2 class="center">Add Notice</h2>
+        <div class="row">
+            <form class="col s12" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}  
+                {{form.media}} 
+                 <div class="row">
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">card_giftcard</i>
+                      {{form.title}}
+                      <label for="id_title">Title</label>
+                  </div>
+                  <div class="input-field col s6">
+                      <i class="material-icons prefix">card_giftcard</i>
+                      {{form.label}}
+                      <label for="id_label">Label</label>
+                   </div>
+                </div>
+                <div class="row">
+                    <div class="input-field">
+                      {{form.description}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field">
+                      {{form.notice_file}}
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <select name="concerned_hostels" multiple>
+                      <option value="" disabled selected>Choose Concerned Hostel</option>
+                      {% for name in concerned_hostels %}
+                       <option value="{{name.id}}">{{name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="input-field col s4 right">
+                    {{form.val_time}}
+                </div>
+                </div>               
+                  <div class="input-field col s12">
+                      <select name="issuing_authority" required>
+                      <option value="" disabled selected>ISSUING AUTHORITY</option>
+                      <optgroup label="Chief Warden">
+                            {% for name in CWs %}
+                            <option value="{{name.Name}}">
+                              {%if forloop.counter == 1 %}
+                              Chief Warden(Boys)
+                              {%else%}
+                              Chief Warden(Girls)
+                              {%endif%}
+                            </option>
+                            {%endfor%}
+                      </optgroup>
+                      <optgroup label="General Authority">
+                          {%for name in GAs %}
+                          <option value="{{name.Name}}">
+                            {{name.Name}}
+                          </option>
+                          {%endfor%}
+                      </optgroup>
+                      <optgroup label="Mess Authority">
+                          {%for name in Ws %}
+                          <option value="{{name.hostel}} Warden">
+                             Warden ({{name.hostel}})
+                          </option>
+                          {%endfor%}
+                      </optgroup>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn waves-light" type="submit" name="submit">Add
+                <i class="material-icons right">send</i>
+                </button> 
+            </form>
+        </div>
+    </div>
+
+{%endblock%}

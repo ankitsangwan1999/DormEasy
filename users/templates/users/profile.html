@@ -1,0 +1,118 @@
+{% extends 'noticeapp/newbase.html'%}
+{%block content%}
+	{%if user.is_authenticated%}
+	<div class="container">
+		<ul class="collection with-header">
+			<li class="collection-header brown-text">
+					<div>
+						<table>
+							<tr>
+								<td>
+									<h4>Username:</h4> 
+								</td>
+								<td>
+									<h4>{{user.username}}</h4>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>First Name:</h4> 
+								</td>
+								<td>
+									<h4>{{user.first_name}}</h4>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Last Name:</h4> 
+								</td>
+								<td>
+									<h4>{{user.last_name}}</h4>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Reg. No.:</h4> 
+								</td>
+								<td>
+									<h4>{{user.profile.regno}}</h4>
+									<!-- Possible Because User model is in One TO One Relationship with Profile Model  -->
+									<!--i.e. user = models.OneToOneField(User,on_delete=models.CASCADE) in Profile Model-->
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Email:</h4> 
+								</td>
+								<td>
+									<h4>{{user.email}}</h4>
+								</td>
+							</tr>
+
+						</table>
+			    	</div>
+			</li>
+		
+				<h3>Update info:</h3>
+		
+			<li class="collection-header brown-text">
+		      <form method="post" action="" enctype="multipart/form-data">
+		      <!-- Adding Security from Cross-site hacking acttacks -->
+		      {% csrf_token %}
+		      <label for="id_first_name" class="active">First Name:</label>
+		            <input type="text" name="first_name" value="{{user.first_name}}" 
+		            		maxlength="150"
+		                    required="" id="id_first_name">
+		      <label for="id_last_name" class="active">Last Name:</label>
+		            <input type="text" name="last_name" value="{{user.last_name}}" 
+		            		maxlength="150"
+		                    required="" id="id_last_name">
+		        <label for="id_username" class="active">Username:</label>
+		            <input type="text" name="username" value="{{user.username}}" maxlength="150"
+		                    required="" id="id_username">
+		            <br>
+		            <span class="helptext">
+		              Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+		            </span>
+		            <br/>
+		        <label for="id_email" class="active">Email:</label>
+		            <input type="email" name="email" value="{{user.email}}" 
+		                    required="" id="id_email">
+		        <div>
+	                <a class ="btn" href="{% url 'password_reset' %}">
+	                	Change Password
+	                </a>
+		        </div>
+		    	</br>
+		    	<label>Semester:</label>        
+                    <div class="input-field col s12">
+                    <select name="sem" required>
+                        {% for value,sem in sem_choices %}
+                        	{%if value == user.profile.sem %}
+                                <option value="{{value}}" selected>{{sem}}</option>
+                        	{%else%}
+                        	<option value="{{value}}">{{sem}}</option>
+                        	{%endif%}
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <label>Hostel Alloted:</label>
+                <div class="input-field col s12">
+                    <select name="hostel_alloted" required>
+                      {% for hostel in concerned_hostels%}
+                    	{%if hostel == user.profile.hostel_alloted %}
+                            <option value="{{hostel}}" selected>{{hostel}}</option>
+                    	{%else%}
+                    		<option value="{{hostel}}">{{hostel}}</option>
+                    	{%endif%}
+                      {% endfor %}
+                    </select>
+		        <button class="button" type="submit">Update</button>
+		      </form>
+		    </li>
+		</ul>
+	</div>
+	{%else%}
+		<h1>Login First</h1>
+	{%endif%}
+{%endblock content%}

@@ -1,0 +1,66 @@
+{%extends "noticeapp/newbase.html" %}
+{%block content%}
+<div class="container">
+    <ul class="collection with-header">
+      <li class="collection-header brown-text">
+        <div>
+           <div class="chip chip-imp">
+            <strong>{{complain.first_complainer}}</strong>
+          </div>
+          <div class="right">
+            <strong>
+                {{complain.date_added|date:"F d, Y"}}
+            </strong>
+          </div>
+        </div>
+        <div class="divider"></div> 
+          <div>
+            <h4  id="{{post.label}}">
+                {{complain.title}}
+            </h4>
+            <div class="chip chip-imp">
+                 Concerned Authority: {{complain.concerned_authority}}
+ 			</div>
+ 			<div class="chip chip-imp">
+                 Concerned Hostel: {{complain.related_hostel}}
+ 			</div>
+ 			<br>
+ 			<div class="chip chip-imp">
+ 				{% for value,choice in status_choices%}
+                        {%if value == complain.status%}
+                        	Status: {{choice}}
+                        {%endif%}
+                {% endfor %}
+            </div>
+            <span class="right">
+              <a class=" tooltipped" data-position="top" data-tooltip="Click To Support This Complain...">
+               <button id="dislike" onclick="dislike()" value1="{{complain.id}}"><b id="number">{{complain.number}}</b><i class="material-icons">thumb_down</i></button>
+              </a>
+        </span>
+          </div>
+        </li>
+        <li class="collection-item content-markdown">
+            <p>{{complain.complaint|safe}}</p>
+             <!-- include complain here -->
+             {% include 'complain/comment.html' %}
+        </li>
+        {% if user.is_staff and complain.concerned_authority == user.email %}
+        <li>
+        <form method="POST">
+          {% csrf_token %}
+          <label>Change Status:</label>
+           <div class="input-field col s12">
+            <select name="status" id="id_status" required>
+                {% for value,status in status_choices %}
+                <option value="{{value}}">{{status}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button  type="submit" name="submit">Update</button>
+          </form>
+        </li>
+        {% endif %}
+    </ul>
+   
+</div>
+{%endblock%}
