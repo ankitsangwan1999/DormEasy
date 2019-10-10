@@ -19,6 +19,7 @@
 #### 5. Students can give feedback after the resolution of the Complaint.
 #### 6. Students can ask for availability of Guest Rooms.
 #### 7. Notice Board for each hostel showing notices on various instructions/events from Authorities. Each notice has a till validity until it is displayed.
+*More features coming soon...
 
 ### Tech Stack:
 **Materialize CSS Framework**
