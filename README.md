@@ -1,6 +1,6 @@
 # Innodev-2019 (Avishkar, MNNIT ALLAHABAD)
 ## Project: DormEasy
-## Discription:
+## Description:
 #### Notice and Complain Portal for hostelers. 
 ## Team Name : ENIGMA
 **Team Memebers:**
