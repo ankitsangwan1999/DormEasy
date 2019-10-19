@@ -1,0 +1,6 @@
+qlite3
+*.pyc
+**/.pyc
+**/pyc
+__pycache_
+.idea/
