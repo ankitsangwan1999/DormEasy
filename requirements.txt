@@ -3,7 +3,7 @@ backports.csv==1.0.7
 Brlapi==0.6.6
 certifi==2018.1.18
 chardet==3.0.4
-cryptography==2.1.4
+cryptography==2.3
 cupshelpers==1.0
 defer==1.0.6
 defusedxml==0.6.0
