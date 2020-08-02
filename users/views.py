@@ -40,9 +40,9 @@ def register(request):
 			messages.error(request,"Password Didn't Match.")
 			return redirect(request.GET.get('next','homepage'))
 		if username in reg_username:
-			 messages.error(request,"Username taken.")
-			 return redirect(request.GET.get('next','homepage'))
-		print(reg_email)
+			messages.error(request,"Username taken.")
+			return redirect(request.GET.get('next','homepage'))
+		# print(reg_email)
 		if email in reg_email:
 			messages.error(request,"Email already registered.")
 			return redirect(request.GET.get('next','homepage'))

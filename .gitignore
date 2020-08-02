@@ -1,4 +1,4 @@
-qlite3
+sqlite3
 *.pyc
 **/.pyc
 **/pyc

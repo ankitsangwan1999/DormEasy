@@ -13,9 +13,9 @@ class AddNoticeForm(forms.ModelForm):
 								queryset=Hostels.objects.all(),
 								to_field_name="hostel_name")
 		widgets = {'title':forms.TextInput(
-									attrs={'id':"id_title" ,'type':"text" ,
-									'class':"validate",
-									'requred':True}),
+									attrs={'id': "id_title", 'type':"text",
+										   'class': "validate",
+									       'requred': True}),
 				'label':forms.TextInput(attrs={'id':"id_label",
 											'type':"text",'class':"validate",
 											'required':True}),

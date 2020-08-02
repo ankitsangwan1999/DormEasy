@@ -8,7 +8,7 @@ class Profile(models.Model):
 	regno = models.PositiveIntegerField()
 # Imp: In our database 1st value of each choice tuple is stored and hence while  
 # assigning values to them we should assign accordingly.
-# i.e. 1 is stored it we choose 1st so, while assigning we shpuld assign 1 only   
+# i.e. 1 is stored if we choose 1st so, while assigning we should assign 1 only
 # not 1st.
 	Sem_Choices=(
 			('1','1st'),('2','2nd'),('3','3rd'),('4','4th'),

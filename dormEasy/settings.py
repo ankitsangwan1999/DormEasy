@@ -25,7 +25,7 @@ SECRET_KEY = '2%!b1h994i2#m_r@07bs=-!)-zv&lg$twejc_o1bi+3+@$x$2='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -154,12 +154,12 @@ LOGIN_URL = '/#login'
 STATIC_URL = '/static/'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_ROOT= os.path.join(BASE_DIR,'media') # full path to store the upladed files
+MEDIA_ROOT= os.path.join(BASE_DIR,'media') # full path to store the uploaded files
 MEDIA_URL='/media/'
 ############ SETTINGS TO CONFIGURE THE EMAIL SENDING PROCEDURE ############
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '#'
-EMAIL_HOST_PASSWORD = '#'
+EMAIL_HOST_USER = 'dormeasymnnit@gmail.com'
+EMAIL_HOST_PASSWORD = 'ankit12345'
