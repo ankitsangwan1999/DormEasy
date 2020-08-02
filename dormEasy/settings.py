@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2%!b1h994i2#m_r@07bs=-!)-zv&lg$twejc_o1bi+3+@$x$2='
+SECRET_KEY = '################'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,10 +96,10 @@ AUTHENTICATION_BACKENDS = (
                     'social_core.backends.facebook.FacebookOAuth2',
                     'django.contrib.auth.backends.ModelBackend',
                 )
-SOCIAL_AUTH_FACEBOOK_KEY = '1882389531907036'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'a2ffa5158d84537467711339d8c6c05e'  # App Secret
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='508117361464-aea2f8uh4itvale9617s0j35efd3u618.apps.googleusercontent.com'  #Paste CLient Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 't-sl1dVQ8tpiiVMo6UwEhQtn' #Paste Secret Key
+SOCIAL_AUTH_FACEBOOK_KEY = '############'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '#################'  # App Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='###################'  #Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '#################' #Paste Secret Key
 
 WSGI_APPLICATION = 'dormEasy.wsgi.application'
 
@@ -161,5 +161,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'dormeasymnnit@gmail.com'
-EMAIL_HOST_PASSWORD = 'ankit12345'
+EMAIL_HOST_USER = '####@gmail.com'
+EMAIL_HOST_PASSWORD = '#######'
