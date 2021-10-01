@@ -5,9 +5,9 @@
 ## Team Name: ENIGMA
 **Team Memebers:**
 
-1.**Ankit Sangwan [(me) ](https://github.com/ankitsangwan1999)(20185091)**
+1.**[Ankit Sangwan](https://github.com/ankitsangwan1999)(20185091)**
 
-2.**Abhishek Singh (20181002)**
+2.**[Abhishek Singh] (20181002)**
 ## Highlight: Our Project won 3rd Prize in Innodev 2019.
 
 ## Features:
