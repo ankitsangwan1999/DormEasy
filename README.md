@@ -2,7 +2,7 @@
 ## Project: DormEasy
 ## Description:
 #### Notice and Complain Portal for hostelers. 
-## Team Name : ENIGMA
+## Team Name: ENIGMA
 **Team Memebers:**
 
 1.**Ankit Sangwan [(me) ](https://github.com/ankitsangwan1999)(20185091)**
@@ -21,19 +21,13 @@
 #### 7. Notice Board for each hostel showing notices on various instructions/events from Authorities. Each notice has a till validity until it is displayed.
 
 ### Tech Stack:
-**Materialize CSS Framework**
-
-**Django Web Framework**
-
-**Sqlite Database**
-
-**Google/Facebook Sign-in API**
-
-**Gmail Emailing Service**
-
-**Sublime Text Editor**
-
-**Git**
+- *Materialize CSS Framework*
+- *Django Web Framework*
+- *Sqlite Database*
+- *Google/Facebook Sign-in API*
+- *Gmail Emailing Service*
+- *Sublime Text Editor*
+- *Git*
 ### Screenshots:
 * **All Notices(Homepage)**
 ![Homepage Image](https://drive.google.com/uc?export=view&id=1U00FaUriUfkXRlOJsGyo1OH05PCnZR1f)
